@@ -7,7 +7,10 @@
  * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
  */
 package main.java.memoranda;
-
+//TASK 2-2 SMELL BETWEEN CLASSES
+//added import so that a resource can be constructed directly from an Element instead of using
+//a message chain to pass the information
+import nu.xom.Element;
 /**
  * 
  */
@@ -31,6 +34,15 @@ public class Resource {
     
     public Resource(String path) {
         _path = path;         
+    }
+    
+    //TASK 2-2 SMELL BETWEEN CLASSES
+    //overloaded the constructor to take an element as an argument. This shortened the message chain
+    //that was present in ResourceListImpl.java
+    public Resource(Element e) {
+        _path = e.getAttribute("path").getValue();
+        _isInetShortcut = e.getAttribute("isInetShortcut") != null;
+        _isProjectFile = e.getAttribute("isProjectFile") != null;    
     }
     
     public String getPath() {
